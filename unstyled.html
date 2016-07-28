@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular Tennis</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+</head>
+<body ng-app="angularTennis" ng-controller="tennisCtrl">
+	<h1>Angular Tennis</h1>
+	<p><input type="text" ng-model="players[0].name"> -- <input type="text" ng-model="players[1].name"></p>
+
+	<p><button ng-click="scorePoint(0);" ng-disabled="!playing">Point {{players[0].name}}</button> -- <button ng-click="scorePoint(1);" ng-disabled="!playing">Point {{players[1].name}}</button></p>
+
+	<p>Points {{players[0].name}}: <span ng-hide="players[0].advantage || players[1].advantage">{{players[0].score}}</span><span ng-show="players[0].advantage">A</span></p>
+	<p>Games {{players[0].name}}: {{players[0].games}}</p>
+	<p>Sets {{players[0].name}}: {{players[0].sets}}</p>
+	<p>&nbsp;<span ng-show="deuce">DEUCE</span></p><p ng-show="tiebreak">TIE BREAK</p>
+	<p>Points {{players[1].name}}: <span ng-hide="players[0].advantage || players[1].advantage"">{{players[1].score}}</span><span ng-show="players[1].advantage">A</span></p>
+	<p>Games {{players[1].name}}: {{players[1].games}}</p>
+	<p>Sets {{players[1].name}}: {{players[1].sets}}</p>
+
+	<table>
+		<tr>
+			<td ng-repeat="set in sets">SET {{ $index+1 }}</td>
+			<td>-</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td ng-repeat="set in sets">{{ set[0] }}</td>
+			<td>-</td>
+			<td><span ng-hide="players[0].advantage || players[1].advantage">{{players[0].score}}</span><span ng-show="players[0].advantage">A</span></td>
+		</tr>
+		<tr>
+			<td ng-repeat="set in sets">{{ set[1] }}</td>
+			<td>-</td>
+			<td><span ng-hide="players[0].advantage || players[1].advantage"">{{players[1].score}}</span><span ng-show="players[1].advantage">A</span></td>
+		</tr>
+	</table>
+
+	<script src="app/app.js"></script>
+	<script src="app/controllers.js"></script>
+</body>
+</html>
